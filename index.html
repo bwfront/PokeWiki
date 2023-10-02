@@ -12,12 +12,12 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-<body onload="arrayPokemon()">
+<body onload="searchPokemon()">
     <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand">Bennet`s Poke Wiki</a>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search Pokemon" aria-label="Search">
+                <input class="form-control me-2" placeholder="Search Pokemon" id="search" onchange="searchPokemon()">
                 <button class="btn btn-outline-success" type="submit">Catch</button>
             </form>
         </div>

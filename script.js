@@ -1,11 +1,3 @@
-function arrayPokemon() {
-  for (let i = 0; i < pokemons.length; i++) {
-    const element = pokemons[i];
-    let url = `https://pokeapi.co/api/v2/pokemon/${element}`;
-    loadPokemon(url);
-  }
-}
-
 async function loadPokemon(url) {
   const response = await fetch(url).catch(errorFunction);
   const responseJSON = await response.json();
@@ -19,15 +11,29 @@ async function loadPokemon(url) {
 
 function renderPokemon(pokeName, pokeIMG, pokeType) {
   const pokemonCon = document.getElementById("pokemon-container");
-    let color = colorType(pokeType)    
-  pokemonCon.innerHTML += 
-  /*html*/`        
+  let color = colorType(pokeType);
+  pokemonCon.innerHTML += /*html*/ `        
     <div id="pokemon" style="background-color: ${color};">
         <p id="type">${pokeType}</p>
         <img id="picture" src="${pokeIMG}" alt="Pokemon">
         <p id="name">${pokeName}</p>
     </div>`;
 }
+
+function searchPokemon() {
+  let search = document.getElementById("search").value;
+  search = search.toLowerCase();
+  document.getElementById("pokemon-container").innerHTML = ``;
+  
+  for (let i = 0; i < pokemons.length; i++) {
+    const element = pokemons[i];
+    if (element.includes(search)) {
+      let url = `https://pokeapi.co/api/v2/pokemon/${element}`;
+      loadPokemon(url);
+    }
+  }
+}
+
 function errorFunction() {
   console.error("ERROR CANT LOAD");
 }
@@ -48,4 +54,3 @@ function errorFunction() {
 
 //SPACIEL ATTACK
 //SPecial defense
-
