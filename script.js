@@ -92,6 +92,9 @@ function cardPokemonHTML(pokeName, pokeIMG, pokeType) {
           <p>Weight</p><p>test</p>
         </div>
       </div>
+      <div onclick="closeCard(1)" id="close-con">
+        <a>Close</a>
+      </div>
     </div>`;
 }
 
