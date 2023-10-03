@@ -46,7 +46,7 @@
 #pokemon-card {
   justify-content: center;
   padding: 100px;
-  background-color: #000000;
+  background-color: #ffffff;
   height: 100vh;
 }
 #pokemon-card-stats {
@@ -83,14 +83,16 @@
   border-radius: 17px;
   background-color: rgba(255, 255, 255, 0.277);
 }
-#stats {
-  margin-top: 30px;
+#stats, #stats-more {
+  margin: 40px 0 25px 0!important;
 }
-#name-stats {
+
+.name-stats {
   display: flex;
   justify-content: space-between;
   margin: 10px;
-  font-size: 22px;
+  font-size: 20px;
+  text-transform: uppercase;
 }
 #pokemon-nav {
   display: flex;
@@ -98,13 +100,18 @@
   font-size: 24px;
   margin-top: 20px;
 }
-#poke-nav-a {
+.active{
+  border-bottom: solid #87a3ff !important;
+  color: #87a3ff !important;
+}
+.poke-nav-a {
+  text-decoration: none;
   font-weight: bold;
   color: #867b7b;
   border-bottom: solid #c7c7c7;
   padding: 3px 10px;
 }
-#poke-nav-a:hover {
+.poke-nav-a:hover {
   border-bottom: solid #87a3ff;
 }
 #picture-card-con {
@@ -128,6 +135,7 @@
   font-weight: bold;
   border-radius: 5px;
   margin: 0 10px;
+  margin-bottom: 10px;
 }
 #close-con:hover{
   color: #ff4444;
@@ -155,14 +163,15 @@
     width: 100%;
     height: 100vw;
   }
-  #stats{
+  #stats, #stats-more{
     margin-top: 20px;
   }
   #pokemon-stats {
     margin-top: 220px;
   }
-  #name-stats {
-    font-size: 18px;
+  .name-stats {
+    font-size: 17px;
+    margin: 2px 10px;
   }
   #pokemon-nav {
     font-size: 20px;
