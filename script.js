@@ -1,7 +1,7 @@
 async function loadPokemon(url, i) {
   const response = await fetch(url).catch(errorFunction);
   const responseJSON = await response.json();
-  const pokeName = await responseJSON["name"];
+  const pokeName = await responseJSON.name;
   const pokeIMG = await responseJSON["sprites"]["other"]["official-artwork"][
     "front_default"
   ];
@@ -10,42 +10,60 @@ async function loadPokemon(url, i) {
   renderPokemon(pokeName, pokeIMG, pokeType, i);
 }
 
+async function fetchData(url) {
+  try {
+      const response = await fetch(url);
+      return await response.json();
+  } catch {
+      errorFunction();
+  }
+}
+
+async function pokemonAttributes(poke, url, i) {
+  return {
+      pokeName: poke.name,
+      pokeIMG: poke.sprites.other["official-artwork"].front_default,
+      pokeNumber: pokeNumbers(i),
+      pokeType: await pokeTypes(url, 0),
+      pokeType2: await pokeTypes(url, 1),
+      pokeAbility: await pokeAbilitys(url, 0),
+      pokeAbility2: await pokeAbilitys(url, 1),
+      pokeHeight: poke.height,
+      pokeWeight: poke.weight,
+      pokeHp: poke.stats[0].base_stat,
+      pokeAttack: poke.stats[1].base_stat,
+      pokeDefense: poke.stats[2].base_stat,
+      pokeSpeed: poke.stats[5].base_stat
+  };
+}
+
+function renderPokemonCard(attributes) {
+  const card = document.getElementById("pokemon-card");
+  card.style.display = "flex";
+  card.innerHTML = cardPokemonHTML(
+      attributes.pokeName,
+      attributes.pokeIMG,
+      attributes.pokeType,
+      attributes.pokeType2,
+      attributes.pokeAbility,
+      attributes.pokeAbility2,
+      attributes.pokeNumber,
+      attributes.pokeHeight,
+      attributes.pokeWeight,
+      attributes.pokeHp,
+      attributes.pokeAttack,
+      attributes.pokeDefense,
+      attributes.pokeSpeed
+  );
+}
+
 async function loadCardPokem(url, i) {
   document.getElementById("body").classList.add("stop-scrolling");
-  const card = document.getElementById("pokemon-card");
-  card.style = "display: flex;";
-  const response = await fetch(url).catch(errorFunction);
-  const responseJSON = await response.json();
-  const pokeName = await responseJSON["name"];
-  const pokeIMG = await responseJSON["sprites"]["other"]["official-artwork"][
-    "front_default"
-  ];
-  const pokeNumber = pokeNumbers(i);
-  const pokeType = await pokeTypes(url, 0);
-  const pokeType2 = await pokeTypes(url, 1);
-  const pokeAbility = await pokeAbilitys(url, 0);
-  const pokeAbility2 = await pokeAbilitys(url, 1);
-  const pokeHeight = await responseJSON["height"];
-  const pokeWeight = await responseJSON["weight"];
-  const pokeHp = await responseJSON["stats"][0]["base_stat"];
-  const pokeAttack = await responseJSON["stats"][1]["base_stat"];
-  const pokeDefense = await responseJSON["stats"][2]["base_stat"];
-  const pokeSpeed = await responseJSON["stats"][5]["base_stat"];
-  card.innerHTML = cardPokemonHTML(
-    pokeName,
-    pokeIMG,
-    pokeType,
-    pokeType2,
-    pokeAbility,
-    pokeAbility2,
-    pokeNumber,
-    pokeHeight,
-    pokeWeight,
-    pokeHp,
-    pokeAttack,
-    pokeDefense,
-    pokeSpeed
-  );
+  const responseJSON = await fetchData(url);
+  if (responseJSON) {
+      const attributes = await pokemonAttributes(responseJSON, url, i);
+      renderPokemonCard(attributes);
+  }
 }
 
 function pokeNumbers(i) {

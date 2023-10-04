@@ -718,7 +718,6 @@ const pokemons = [
 
 function colorType(pokeType) {
   let color, gradient;
-
   switch (pokeType) {
     case "grass":
       color = "#103000";      
