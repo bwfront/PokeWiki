@@ -1,4 +1,4 @@
-const pokemons = [
+const pokemonss = [
   "bulbasaur",
   "ivysaur",
   "venusaur",
@@ -715,7 +715,15 @@ const pokemons = [
   "litten",
   "torracat",
 ];
-
+const pokemons = [
+  "bulbasaur",
+  "ivysaur",
+  "venusaur",
+  "charmander",
+  "charmeleon",
+  "charizard",
+  "squirtle",
+];
 function colorType(pokeType) {
   let color, gradient;
   switch (pokeType) {

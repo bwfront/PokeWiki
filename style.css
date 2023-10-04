@@ -85,13 +85,25 @@
 #stats-more {
   margin: 40px 0 25px 0 !important;
 }
-
+#stats-more{
+  margin-bottom: 41px !important;
+}
+.bar-attribute{
+  display: flex;
+  align-items: center;
+}
+.bar-attribute p{
+  margin-bottom: -1px;
+}
 .name-stats {
   display: flex;
   justify-content: space-between;
   margin: 10px;
   font-size: 20px;
   text-transform: uppercase;
+}
+.ma-b{
+  margin-bottom: 26px;
 }
 #pokemon-nav {
   display: flex;
@@ -139,6 +151,21 @@
 #close-con:hover {
   color: #ff4444;
   background-color: rgb(255, 214, 214);
+}
+.bar {
+  width: 180px;
+  height: 13px;
+  background-color: #e0e0e0;
+  border: 1px solid #b0b0b0;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  margin-right: 40px;
+}
+.fill {
+  background-color: #87a3ff;
+  height: 100%;
+  width: 0;
 }
 @media (max-width: 634px) {
   #pokemon {
@@ -191,5 +218,11 @@
   }
   #pokemon-headline {
     font-size: 28px;
+  }
+  .bar {
+    width: 140px;
+  }
+  .ma-b{
+    margin-bottom: 18px;
   }
 }

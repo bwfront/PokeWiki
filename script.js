@@ -6,7 +6,6 @@ async function loadPokemon(url, i) {
     "front_default"
   ];
   const pokeType = await pokeTypes(url, 0);
-  console.log(responseJSON["stats"]);
   renderPokemon(pokeName, pokeIMG, pokeType, i);
 }
 
@@ -63,6 +62,7 @@ async function loadCardPokem(url, i) {
   if (responseJSON) {
       const attributes = await pokemonAttributes(responseJSON, url, i);
       renderPokemonCard(attributes);
+      pokemonStatsBar(attributes);
   }
 }
 
@@ -202,23 +202,54 @@ function cardPokemonHTML(
       </div>
       
       <div id="stats-more" style="display: none">
-        <div class="name-stats">
-          <b>HP</b><p>${pokeHp}</p>
-        </div>
-        <div class="name-stats">
-          <b>Attack</b><p>${pokeAttack}</p>
-        </div>
-        <div class="name-stats">
-          <b>Defense</b><p>${pokeDefense}</p>
-        </div>
-        <div class="name-stats">
-            <b>Speed</b><p>${pokeSpeed}</p>
+        <div class="name-stats ma-b">
+          <b>HP</b>
+          <div class="bar-attribute">
+            <div class="bar">
+              <div class="fill" id="hp-barFill"></div>
+            </div>
+            <p>${pokeHp}</p>
           </div>
+        </div>
+        <div class="name-stats ma-b">
+          <b>Attack</b>
+          <div class="bar-attribute">
+            <div class="bar">
+              <div class="fill" id="attack-barFill"></div>
+            </div>
+            <p>${pokeAttack}</p>
+          </div>
+        </div>
+        <div class="name-stats ma-b">
+          <b>Defense</b>
+          <div class="bar-attribute">
+            <div class="bar">
+              <div class="fill" id="defense-barFill"></div>
+            </div>
+            <p>${pokeDefense}</p>
+          </div>
+        </div>
+        <div class="name-stats ma-b">
+          <b>Speed</b>
+          <div class="bar-attribute">
+            <div class="bar">
+              <div class="fill" id="speed-barFill"></div>
+            </div>
+            <p>${pokeSpeed}</p>
+          </div>
+        </div>
       </div>
       <div onclick="closeCard(1)" id="close-con">
         <a>Close</a>
       </div>
     </div>`;
+}
+
+function pokemonStatsBar(attributes){
+  document.getElementById('hp-barFill').style.width = `${attributes.pokeHp}%`;
+  document.getElementById('attack-barFill').style.width = `${attributes.pokeAttack}%`;
+ document.getElementById('defense-barFill').style.width = `${attributes.pokeDefense}%`;
+ document.getElementById('speed-barFill').style.width = `${attributes.pokeSpeed}%`;
 }
 
 function errorFunction() {
