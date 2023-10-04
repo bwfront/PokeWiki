@@ -1,4 +1,4 @@
-const pokemonss = [
+const pokemons = [
   "bulbasaur",
   "ivysaur",
   "venusaur",
@@ -715,77 +715,82 @@ const pokemonss = [
   "litten",
   "torracat",
 ];
-const pokemons = [
-  "bulbasaur",
-  "ivysaur",
-  "venusaur",
-  "charmander",
-  "charmeleon",
-  "charizard",
-  "squirtle",
-  "wartortle",
-  "blastoise",
-  "caterpie",
-  "metapod",
-  "butterfree",
-  "weedle",
-  "kakuna",
-  "beedrill",
-  "pidgey",
-];
+
 function colorType(pokeType) {
+  let color, gradient;
+
   switch (pokeType) {
     case "grass":
-      color = "#204100";
+      color = "#103000";      
+      gradient = "#5caa44";   
       break;
     case "bug":
-      color = "#91ba2d";
+      color = "#607a10";
+      gradient = "#c9ff70";
       break;
     case "fire":
-      color = "#f80c0d";
+      color = "#a80300";
+      gradient = "#ff9270";
       break;
     case "normal":
-      color = "#aca974";
+      color = "#8c8971";
+      gradient = "#e6e3c5";
       break;
     case "water":
-      color = "#11517a";
+      color = "#0a3566";
+      gradient = "#61a0d4";
       break;
     case "rock":
-      color = "#474026";
+      color = "#2d1c0f";
+      gradient = "#9f947a";
       break;
     case "poison":
-      color = "#611380";
+      color = "#450960";
+      gradient = "#bf76c9";
       break;
     case "electric":
-      color = "#969100";
+      color = "#706800";
+      gradient = "#e6e844";
       break;
     case "ground":
-      color = "#bfac21";
+      color = "#8e8010";
+      gradient = "#fff89d";
       break;
     case "psychic":
-      color = "#8a0532";
+      color = "#680220";
+      gradient = "#e05f88";
       break;
     case "fighting":
-      color = "#800b11";
+      color = "#5c0200";
+      gradient = "#e25a5f";
       break;
     case "ice":
-      color = "#103d43";
+      color = "#082529";
+      gradient = "#62a6b5";
       break;
     case "ghost":
-      color = "#472b53";
+      color = "#2e193b";
+      gradient = "#9885b2";
       break;
     case "dragon":
-      color = "#29086a";
+      color = "#1b0049";
+      gradient = "#8d6fd1";
       break;
     case "dark":
-      color = "#2d221c";
+      color = "#1a110d";
+      gradient = "#8b8378";
       break;
     case "steel":
-      color = "#444444";
+      color = "#2c2c2c";
+      gradient = "#b1b1b1";
       break;
     case "fairy":
-      color = "#f87ea7";
+      color = "#e8568c";
+      gradient = "#ffdbee";
       break;
+    default:
+      color = "#000000";
+      gradient = "#555555";
   }
-  return color;
+    return [color, gradient];
 }

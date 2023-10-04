@@ -20,11 +20,11 @@ async function loadCardPokem(url, i) {
   const pokeIMG = await responseJSON["sprites"]["other"]["official-artwork"][
     "front_default"
   ];
+  const pokeNumber = pokeNumbers(i);
   const pokeType = await pokeTypes(url, 0);
   const pokeType2 = await pokeTypes(url, 1);
   const pokeAbility = await pokeAbilitys(url, 0);
   const pokeAbility2 = await pokeAbilitys(url, 1);
-  const pokeNumber = pokeNumbers(i);
   const pokeHeight = await responseJSON["height"];
   const pokeWeight = await responseJSON["weight"];
   const pokeHp = await responseJSON["stats"][0]["base_stat"];
@@ -76,16 +76,16 @@ function searchPokemon() {
 
 function renderPokemon(pokeName, pokeIMG, pokeType, i) {
   const pokemonCon = document.getElementById("pokemon-container");
-  let color = colorType(pokeType);
+  let colors = colorType(pokeType);
   pokemonCon.innerHTML += /*html*/ `        
-    <div id="pokemon" style="background-color: ${color};" onclick="cardPokemon(${i})">
+    <div id="pokemon" style="background-color: ${colors[0]}; background-image: linear-gradient${colors[0]}, ${colors[1]};" onclick="openPokemonCard(${i})">
         <p id="type">${pokeType}</p>
         <img id="picture" src="${pokeIMG}" alt="Pokemon">
         <p id="name">${pokeName}</p>
     </div>`;
 }
 
-function cardPokemon(i) {
+function openPokemonCard(i) {
   let pokemonid = pokemons[i];
   let url = `https://pokeapi.co/api/v2/pokemon/${pokemonid}`;
   document.getElementById("pokemon-container").innerHTML = ``;
@@ -102,7 +102,7 @@ async function pokeAbilitys(url, i) {
   }
 }
 
-async function pokeTypes(url, i) {
+async function pokeTypes(url, i,) {
   const response = await fetch(url).catch(errorFunction);
   const responseJSON = await response.json();
   if (!responseJSON.types?.[i]?.type?.name) {
@@ -121,25 +121,22 @@ function closeCard(i) {
   }
 }
 
-function switchToMainStats() {
+function switchStats(i) {
   const stats = document.getElementById("stats");
-  stats.style = "";
   const statsMore = document.getElementById("stats-more");
-  statsMore.style = "display: none";
-  const about = document.getElementById('aboutCard');
-  about.classList.add("active");
-  const base = document.getElementById('baseCard');
-  base.classList.remove("active");
-}
-function switchToBaseStats() {
-  const stats = document.getElementById("stats");
-  stats.style = "display: none";
-  const statsMore = document.getElementById("stats-more");
-  statsMore.style = "";
-  const about = document.getElementById('aboutCard');
-  about.classList.remove("active");
-  const base = document.getElementById('baseCard');
-  base.classList.add("active");
+  const about = document.getElementById("aboutCard");
+  const base = document.getElementById("baseCard");
+  if(i == 'about'){
+    stats.style = "";
+    statsMore.style = "display: none";
+    about.classList.add("active");
+    base.classList.remove("active");
+  }else{
+    stats.style = "display: none";
+    statsMore.style = "";
+    about.classList.remove("active");
+    base.classList.add("active");
+  }
 }
 
 function cardPokemonHTML(
@@ -157,9 +154,10 @@ function cardPokemonHTML(
   pokeDefense,
   pokeSpeed
 ) {
-  let color = colorType(pokeType);
+  let colors = [];
+  colors = colorType(pokeType);
   return /*html*/ `        
-    <div id="pokemon-card-stats" style="background-color: ${color};">
+    <div id="pokemon-card-stats" style="background-color: ${colors[0]}; background-image: linear-gradient${colors[0]}, ${colors[1]};">
       <div id="pokemon-headline"><span>${pokeName}</span><span id="number">${i}</span></div>
       <div id="picture-card-con">
         <img src="${pokeIMG}" alt="pokemon name img" id="picture-card">
@@ -167,8 +165,8 @@ function cardPokemonHTML(
     </div>
     <div id="pokemon-stats">
       <div id="pokemon-nav">
-        <a class="poke-nav-a active" id="aboutCard" onclick="switchToMainStats()">ABOUT</a>
-        <a class="poke-nav-a" id="baseCard" onclick="switchToBaseStats()">BASE STATS</a>
+        <a class="poke-nav-a active" id="aboutCard" onclick="switchStats('about')">ABOUT</a>
+        <a class="poke-nav-a" id="baseCard" onclick="switchStats('')">BASE STATS</a>
       </div>
       <div id="stats">
         <div class="name-stats">
