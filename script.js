@@ -2,37 +2,35 @@ async function loadPokemon(url, i) {
   const response = await fetch(url).catch(errorFunction);
   const responseJSON = await response.json();
   const pokeName = await responseJSON.name;
-  const pokeIMG = await responseJSON["sprites"]["other"]["official-artwork"][
-    "front_default"
-  ];
+  const pokeIMG = await responseJSON.sprites.other["official-artwork"].front_default;
   const pokeType = await pokeTypes(url, 0);
   renderPokemon(pokeName, pokeIMG, pokeType, i);
 }
 
 async function fetchData(url) {
   try {
-      const response = await fetch(url);
-      return await response.json();
+    const response = await fetch(url);
+    return await response.json();
   } catch {
-      errorFunction();
+    errorFunction();
   }
 }
 
 async function pokemonAttributes(poke, url, i) {
   return {
-      pokeName: poke.name,
-      pokeIMG: poke.sprites.other["official-artwork"].front_default,
-      pokeNumber: pokeNumbers(i),
-      pokeType: await pokeTypes(url, 0),
-      pokeType2: await pokeTypes(url, 1),
-      pokeAbility: await pokeAbilitys(url, 0),
-      pokeAbility2: await pokeAbilitys(url, 1),
-      pokeHeight: poke.height,
-      pokeWeight: poke.weight,
-      pokeHp: poke.stats[0].base_stat,
-      pokeAttack: poke.stats[1].base_stat,
-      pokeDefense: poke.stats[2].base_stat,
-      pokeSpeed: poke.stats[5].base_stat
+    pokeName: poke.name,
+    pokeIMG: poke.sprites.other["official-artwork"].front_default,
+    pokeNumber: pokeNumbers(i),
+    pokeType: await pokeTypes(url, 0),
+    pokeType2: await pokeTypes(url, 1),
+    pokeAbility: await pokeAbilitys(url, 0),
+    pokeAbility2: await pokeAbilitys(url, 1),
+    pokeHeight: poke.height,
+    pokeWeight: poke.weight,
+    pokeHp: poke.stats[0].base_stat,
+    pokeAttack: poke.stats[1].base_stat,
+    pokeDefense: poke.stats[2].base_stat,
+    pokeSpeed: poke.stats[5].base_stat,
   };
 }
 
@@ -40,19 +38,19 @@ function renderPokemonCard(attributes) {
   const card = document.getElementById("pokemon-card");
   card.style.display = "flex";
   card.innerHTML = cardPokemonHTML(
-      attributes.pokeName,
-      attributes.pokeIMG,
-      attributes.pokeType,
-      attributes.pokeType2,
-      attributes.pokeAbility,
-      attributes.pokeAbility2,
-      attributes.pokeNumber,
-      attributes.pokeHeight,
-      attributes.pokeWeight,
-      attributes.pokeHp,
-      attributes.pokeAttack,
-      attributes.pokeDefense,
-      attributes.pokeSpeed
+    attributes.pokeName,
+    attributes.pokeIMG,
+    attributes.pokeType,
+    attributes.pokeType2,
+    attributes.pokeAbility,
+    attributes.pokeAbility2,
+    attributes.pokeNumber,
+    attributes.pokeHeight,
+    attributes.pokeWeight,
+    attributes.pokeHp,
+    attributes.pokeAttack,
+    attributes.pokeDefense,
+    attributes.pokeSpeed
   );
 }
 
@@ -60,9 +58,9 @@ async function loadCardPokem(url, i) {
   document.getElementById("body").classList.add("stop-scrolling");
   const responseJSON = await fetchData(url);
   if (responseJSON) {
-      const attributes = await pokemonAttributes(responseJSON, url, i);
-      renderPokemonCard(attributes);
-      pokemonStatsBar(attributes);
+    const attributes = await pokemonAttributes(responseJSON, url, i);
+    renderPokemonCard(attributes);
+    pokemonStatsBar(attributes);
   }
 }
 
@@ -120,7 +118,7 @@ async function pokeAbilitys(url, i) {
   }
 }
 
-async function pokeTypes(url, i,) {
+async function pokeTypes(url, i) {
   const response = await fetch(url).catch(errorFunction);
   const responseJSON = await response.json();
   if (!responseJSON.types?.[i]?.type?.name) {
@@ -144,12 +142,12 @@ function switchStats(i) {
   const statsMore = document.getElementById("stats-more");
   const about = document.getElementById("aboutCard");
   const base = document.getElementById("baseCard");
-  if(i == 'about'){
+  if (i == "about") {
     stats.style = "";
     statsMore.style = "display: none";
     about.classList.add("active");
     base.classList.remove("active");
-  }else{
+  } else {
     stats.style = "display: none";
     statsMore.style = "";
     about.classList.remove("active");
@@ -245,11 +243,17 @@ function cardPokemonHTML(
     </div>`;
 }
 
-function pokemonStatsBar(attributes){
-  document.getElementById('hp-barFill').style.width = `${attributes.pokeHp}%`;
-  document.getElementById('attack-barFill').style.width = `${attributes.pokeAttack}%`;
- document.getElementById('defense-barFill').style.width = `${attributes.pokeDefense}%`;
- document.getElementById('speed-barFill').style.width = `${attributes.pokeSpeed}%`;
+function pokemonStatsBar(attributes) {
+  document.getElementById("hp-barFill").style.width = `${attributes.pokeHp}%`;
+  document.getElementById(
+    "attack-barFill"
+  ).style.width = `${attributes.pokeAttack}%`;
+  document.getElementById(
+    "defense-barFill"
+  ).style.width = `${attributes.pokeDefense}%`;
+  document.getElementById(
+    "speed-barFill"
+  ).style.width = `${attributes.pokeSpeed}%`;
 }
 
 function errorFunction() {
