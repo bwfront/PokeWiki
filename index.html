@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex</title>
+    <title>Pokédex</title>
     <script src="script.js"></script>
     <script src="pokemons.js"></script>
+    <link rel="icon" href="img/pokemon.png" type="image/x-icon">
+
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -15,7 +17,7 @@
 <body onload="searchPokemon()" id='body'>
     <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand">Bennet`s Poke Wiki</a>
+            <a class="navbar-brand">Bennet`s PokéWiki</a>
             <div class="d-flex" role="search">
                 <input class="form-control me-2" placeholder="Search Pokemon" id="search" oninput="searchPokemon()">
                 <button class="btn btn-outline-success" onclick="searchPokemon()" type="button">Catch</button>
