@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex</title>
     <script src="script.js"></script>
-    <script src="pokemons.js"></script>
+    <script src="pokedata.js"></script>
+    <script src="render.js"></script>
     <link rel="icon" href="img/pokemon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="style.css">
@@ -14,20 +15,23 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-<body onload="searchPokemon()" id='body'>
+<body onload="showAllPokemons()">
     <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand">Bennet`s PokéWiki</a>
             <div class="d-flex" role="search">
-                <input class="form-control me-2" placeholder="Search Pokemon" id="search" oninput="searchPokemon()">
+                <input class="form-control me-2" placeholder="Search Pokemon" id="search">
                 <button class="btn btn-outline-success" onclick="searchPokemon()" type="button">Catch</button>
             </div>
         </div>
     </nav>
+    <div id="search-error"></div>
     <div id="pokemon-container">
     </div>
-    <div id="pokemon-card" style="display: none;">
+    <div id="pokemon-card" class="d-flex align-items-center" style="display: none;">
     </div>
+    <div id="load-more" class="d-flex justify-content-center m-5"></div>
+
 </body>
 
 </html>
