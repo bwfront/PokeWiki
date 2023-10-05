@@ -15,6 +15,7 @@
   margin: 5px;
   padding: 20px;
   box-shadow: inset 0px 4px 26px 17px rgba(0, 0, 0, 0.23);
+  cursor: pointer;
 }
 .load-button{
   padding: 15px 40px !important;
