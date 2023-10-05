@@ -5,6 +5,7 @@ loadAllPokemonNames();
 let allPokemonNames = [];
 
 async function showAllPokemons() {
+  document.getElementById("pokemon-container").innerHTML = ``;
   showPokemons += 15;
   if (showPokemons < 1019) {
     for (let i = 1; i < showPokemons; i++) {

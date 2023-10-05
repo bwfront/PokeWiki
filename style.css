@@ -143,6 +143,7 @@
   border-radius: 5px;
   margin: 0 10px;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 #close-con:hover {
   color: #ff4444;
